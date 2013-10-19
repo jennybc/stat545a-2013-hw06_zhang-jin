@@ -22,9 +22,9 @@ ggsave("Whole.weight vs Height.png")
 ggsave("Length vs Height.png")
 ggsave("WLength vs Diameter.png")
 
-
 # From above graphs, it is obvious that Length, Height and Diameter are relatively linear correlated. In fact, it is natural to think that the bigger the abalone, the haeavier they are, so I want ot check whether it is perfectly correlated between Whole.weight and Volume. 
 # Construct Volum and Whole.weight dataset
+
 yData = ddply(Data, ~Sex+Age, summarize, Volume = Length * Diameter * Height,  Whole.weight = Whole.weight,Rings = Rings)
 # Draw the point and regression lines
 cols <- c("Linear"="#f04546","Cubic"="#3591d1")
@@ -35,7 +35,7 @@ ggplot(data = yData, aes(x = Whole.weight, y = Volume)) +
   scale_colour_manual("Type of Regression",values = cols) + 
   ggtitle("Volume vs Whole.weight") + coord_flip() + 
   scale_y_continuous(name = "Volume", breaks = seq(0, 0.15, by = 0.03))
-ggsave("Volume vs Whole.weight")
+ggsave("Volume vs Whole.weight.png")
 # From the graph above, it can be seen that Cubic regression and Linear regression is almost same in the begining, but diverge when Volume is large, which means that Volume and Whole.weight is highly correlated for small abalone.
 
 # Why not just use Whole.weight to predict the Rings of abalone? 
@@ -210,4 +210,5 @@ ggplot(subset(Data, Sex %in% c("F","I")), aes(x = Rings, y = Whole.weight)) +   
   ggtitle("Max_slope vs Min_slope of Whole.weight") + 
   scale_colour_manual("Age Group",values = c("4","3","5"), labels = c("Young","Adult","Old")) 
 ggsave("Max_slope vs Min_slope of Whole.weight.png")
-# Conclusoin: 
+
+
