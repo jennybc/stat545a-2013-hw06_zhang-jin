@@ -7,6 +7,7 @@
 * <div id="Dataset"> [Description of Dataset] (#Dataset1)
 * <div id="Analysis"> [Detect Outliers and Construct Clean Dataset] (#Analysis1)
 * <div id="Analysis2"> [Clean Data Analysis] (#Analysis21)
+* <div id="Conclusion"> [Conclusion] (#Conclusion1)
 
 
 ### <div id="Introduction1">[Introduction](#Introduction)
@@ -36,7 +37,7 @@ Data =  subset(Data, select= -c(Shucked.weight,Viscera.weight,Shell.weight))
 ```
 
 Plot number of abalone with different rings. 
-```{r}
+```{r fig.width= 10}
 ggplot(Data, aes(x = Rings, fill = Sex)) +
   geom_bar(binwidth = 1, color = "blue", origin = min(Data$Rings), position = "identity") +
   scale_x_continuous(name = "Rings", breaks = seq(0, 30, by = 2)) +
@@ -58,13 +59,13 @@ gData= cbind(Data,Age)
 ```
 
 Roughly plot the graph and get little taste about data
-```{r}
+```{r fig.width= 10}
 ggplot(gData, aes(x = Height, y = factor(Rings), colour= factor(Sex) ))+ geom_jitter(position = position_jitter(width = .3))  + geom_point() + ggtitle("Original Data: Height vs Rings") + scale_colour_brewer(type="seq",palette="Set1") 
 ```
 
 
 #### From the graph above we can see that there are some outlines in Female. I want to get rid of them.
-```{r}
+```{r fig.width= 10}
 jData = subset(gData, Height <0.4)
 ggplot(jData, aes(x = Height, y = factor(Rings), colour= factor(Sex) ))+ geom_jitter(position = position_jitter(width = .1))  + geom_point() + ggtitle("Reduced Data: Height vs Rings") + scale_colour_brewer(type="seq",palette="Set1") 
 ```
@@ -89,7 +90,7 @@ with(Data, table(Sex, Age))
 
 #### First of all, I want to test whether Observation data like Height, Whole.weight can be helpful to decide the abalone to different Age group. Logistic regression is applied to do this analysis.
 
-```{r}
+```{r fig.width= 10}
 ggplot(Data, aes(x = Whole.weight, y=Height)) + geom_point(aes(colour = Rings)) +scale_colour_gradient(low = "purple") + stat_smooth(colour="red") + ggtitle("Whole.weight vs Height")
 
 ggplot(Data, aes(x = Length, y=Height)) + geom_point(aes(colour = Rings)) +scale_colour_gradient(low = "purple") + stat_smooth(colour="red") + ggtitle("Length vs Height")
@@ -103,7 +104,7 @@ Construct Volume and Whole.weight dataset
 yData = ddply(Data, ~Sex+Age, summarize, Volume = Length * Diameter * Height,  Whole.weight = Whole.weight,Rings = Rings)
 ```
 Draw the point and regression lines
-```{r}
+```{r fig.width= 10}
 cols <- c("Linear"="#f04546","Cubic"="#3591d1")
 ggplot(data = yData, aes(x = Whole.weight, y = Volume)) + 
   geom_smooth(method = "lm",aes(colour = "Linear"),lwd = 1 )+ 
@@ -118,17 +119,17 @@ ggplot(data = yData, aes(x = Whole.weight, y = Volume)) +
 
 #### Why not just use Whole.weight to predict the Rings of abalone? 
 Calculate mean and variance of Whole.weight in different Sex.
-```{r}
+```{r }
 with(Data, do.call(rbind, tapply(Whole.weight, Sex, function(x) c(M = mean(x), SD = sd(x)))))
 ```
 
 It seems that F and M are more heavier than I. Does that mean I group do not have large rings?
-```{r}
+```{r fig.width= 10}
 ggplot(data=Data, aes(x = Rings,group=Sex,colour=Sex)) + geom_density() + ggtitle("Density of Rings of each Sex")
 ```
 Sex I group abalone is younger than F and M group, but it do have old abalone with Sex I.
 
-```{r}
+```{r fig.width= 10}
 ggplot(data = Data, aes(x = factor(Age), y = Whole.weight)) + geom_boxplot(outlier.colour = "purple", outlier.size = 3,aes(fill = Sex)) + facet_wrap(~Sex, ncol=3) + ggtitle("Whole.weight vs Age for different Sex") + xlab("Age")
 ```
 
@@ -144,7 +145,7 @@ table(pred,Data$Age)
 ```
 
 Construct a new dataset with information above.
-```{r}
+```{r fig.width= 10}
 newdata = with(yData, data.frame(Weight = Whole.weight,Sex = Sex, Pred_Prob = pp, Age = Age,Pred_Age = pred))
 head(newdata)
 ggplot(newdata, aes(x = Pred_Age, y=Age, colour = factor(Pred_Age==Age))) +
@@ -154,7 +155,7 @@ ggplot(newdata, aes(x = Pred_Age, y=Age, colour = factor(Pred_Age==Age))) +
 ```
 
 Plot the Predicted Probability for different age group
-```{r}
+```{r fig.width= 10}
 cols <- c("Young"="blue","Adult"="#f04546", "Old" = "green")
 ggplot(newdata, aes(x= Weight)) + 
   geom_line(aes(y = Pred_Prob.1, colour = "Young")) + 
@@ -184,7 +185,7 @@ newdataL2 = with(yData, data.frame(Weight = Whole.weight,Sex = Sex,Age = Age, Pr
 Data_misL2 = subset(newdataL2, Age != Pred_Age2)
 ```
 Plot the graph:
-```{r}
+```{r fig.width= 10}
 p1 = ggplot(Data_misL1, aes(x = Age,fill = Sex)) + geom_bar(binwidth = 1/2,color = "darkgrey") + 
   ylab("Number of mis-classfied data") + 
   ggtitle(" Using Whole.weight only") +
@@ -208,7 +209,7 @@ newdataL3 = with(yData, data.frame(Weight = Whole.weight,Sex = Sex,Age = Age, Pr
 Data_misL3 = subset(newdataL3, Age != Pred_Age3)
 ```
 Plot the graph:
-```{r}
+```{r fig.width= 10}
 ggplot(newdataL2, aes(x = Pred_Age2, y=Age, colour = factor(Pred_Age2==Age))) +
   geom_point(position = "jitter") + 
   scale_colour_manual("Age Group", values = c("2", "3"), labels = c("Wong Classification","Right Classification")) +
@@ -237,7 +238,7 @@ jData <- ddply(Data, ~ Sex + Rings, function(x) {
 ```
 
 Plot the graph 
-```{r}
+```{r fig.width= 10}
 p_Height = ggplot(jData, aes(x = Rings,y = Height, group = stat,colour = stat)) + geom_line() + geom_point() + facet_wrap(~Sex, ncol=3) + ggtitle("Height: Min vs Min") + theme(legend.position = "none")
 p_Length = ggplot(jData, aes(x = Rings,y = Length, group = stat,colour = stat)) + geom_line() + geom_point() + facet_wrap(~Sex, ncol=3) + ggtitle("Length: Min vs Max")  + theme(legend.position = "none")
 p_Diameter = ggplot(jData, aes(x = Rings,y = Diameter, group = stat,colour = stat)) + geom_line() + geom_point() + facet_wrap(~Sex, ncol=3) + ggtitle("Diameter: Min vs Max") + theme(legend.position = "none")
@@ -251,7 +252,7 @@ grid.arrange(arrangeGrob(p_Whole.weight+theme(legend.position="none"),p_Length,p
 ```
 
 Try the similar thing in xyplot
-```{r}
+```{r fig.width= 10}
 px_Height = xyplot(Height ~  Rings| Sex, jData, group=stat, auto.key =  list(columns = 2,x = 0.35, y = 0.85, corner = c(0, 1)), type=c("p", "l"),par.settings = list(superpose.line = list(col = c("red", "blue")), superpose.symbol = list(col = c("red", "blue"))), grid = "h")
 grid.arrange(arrangeGrob(p_Height+xlab(""),px_Height))
 ```
@@ -285,7 +286,7 @@ print(foo,  type = "html", include.rownames = FALSE)
 
 #### From above table, it shows that Sex I have min_slope for all Variables, and Sex F have max_slope for all variables.
 Plot the regression line of Height
-```{r}
+```{r fig.width= 10}
 ggplot(subset(Data, Sex %in% c("F","I")), aes(x = Rings, y = Height) ) +   facet_wrap(~Sex, ncol=2) + 
   geom_smooth(method = "lm", colour = "purple") + 
   geom_point(aes(colour = factor(Age))) +
@@ -294,7 +295,7 @@ ggplot(subset(Data, Sex %in% c("F","I")), aes(x = Rings, y = Height) ) +   facet
 ```
 
 Plot the regression line of Diameter
-```{r}
+```{r fig.width= 10}
 ggplot(subset(Data, Sex %in% c("F","I")), aes(x = Rings, y = Diameter)) +   facet_wrap(~Sex, ncol=2) + 
   geom_smooth(method = "lm", colour = "purple") + 
   geom_point(aes(colour = factor(Age))) +
@@ -303,7 +304,7 @@ ggplot(subset(Data, Sex %in% c("F","I")), aes(x = Rings, y = Diameter)) +   face
 ```
 
 Plot the regression line of Length
-```{r fig.width= 12}
+```{r fig.width= 10}
 ggplot(subset(Data, Sex %in% c("F","I")), aes(x = Rings, y = Length)) +   facet_wrap(~Sex, ncol=2) + 
   geom_smooth(method = "lm", colour = "purple") + 
   geom_point(aes(colour = factor(Age))) +
@@ -312,13 +313,15 @@ ggplot(subset(Data, Sex %in% c("F","I")), aes(x = Rings, y = Length)) +   facet_
 ```
 
 Plot the regression line of Whole.weight
-```{r qplot, fig.width= 12}
+```{r qplot, fig.width= 10}
 ggplot(subset(Data, Sex %in% c("F","I")), aes(x = Rings, y = Whole.weight)) +   facet_wrap(~Sex, ncol=2) + 
   geom_smooth(method = "lm", colour = "purple") + 
   geom_point(aes(colour = factor(Age))) +
   ggtitle("Max_slope vs Min_slope of Whole.weight") + 
   scale_colour_manual("Age Group",values = c("4","3","5"), labels = c("Young","Adult","Old")) 
 ```
+
+### <div id="Conclusion1">[Conclusion](#Conclusion)
 
 
 

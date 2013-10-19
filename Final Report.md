@@ -508,7 +508,7 @@ print(foo, type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.0.1 by xtable 1.7-1 package -->
-<!-- Sat Oct 19 01:59:17 2013 -->
+<!-- Sat Oct 19 02:03:15 2013 -->
 <TABLE border=1>
 <TR> <TH> Variable </TH> <TH> Sex </TH> <TH> Intercept </TH> <TH> Slope </TH> <TH> stat </TH>  </TR>
   <TR> <TD> Diameter </TD> <TD> I </TD> <TD align="right"> 0.13 </TD> <TD align="right"> 0.02 </TD> <TD> min_slope </TD> </TR>
