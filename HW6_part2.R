@@ -211,4 +211,7 @@ ggplot(subset(Data, Sex %in% c("F","I")), aes(x = Rings, y = Whole.weight)) +   
   scale_colour_manual("Age Group",values = c("4","3","5"), labels = c("Young","Adult","Old")) 
 ggsave("Max_slope vs Min_slope of Whole.weight.png")
 
+# From the above graphs, it is obvious that the quantility increase of Sex I along with Rings is much greater than Sex F, which means that it may easy to classify the Sex to different Age group by quantility measure like Height, Weight etc.
+
+
 

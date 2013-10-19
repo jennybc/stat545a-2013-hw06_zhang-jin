@@ -7,6 +7,7 @@
 * <div id="Dataset"> [Description of Dataset] (#Dataset1)
 * <div id="Analysis"> [Detect Outliers and Construct Clean Dataset] (#Analysis1)
 * <div id="Analysis2"> [Clean Data Analysis] (#Analysis21)
+* <div id="Conclusion"> [Conclusion] (#Conclusion1)
 
 
 ### <div id="Introduction1">[Introduction](#Introduction)
@@ -508,7 +509,7 @@ print(foo, type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.0.1 by xtable 1.7-1 package -->
-<!-- Sat Oct 19 02:03:15 2013 -->
+<!-- Sat Oct 19 02:21:28 2013 -->
 <TABLE border=1>
 <TR> <TH> Variable </TH> <TH> Sex </TH> <TH> Intercept </TH> <TH> Slope </TH> <TH> stat </TH>  </TR>
   <TR> <TD> Diameter </TD> <TD> I </TD> <TD align="right"> 0.13 </TD> <TD align="right"> 0.02 </TD> <TD> min_slope </TD> </TR>
@@ -572,7 +573,10 @@ ggplot(subset(Data, Sex %in% c("F", "I")), aes(x = Rings, y = Whole.weight)) +
 
 ![plot of chunk qplot](figure/qplot.png) 
 
+#### From the above graphs, it is obvious that the quantity increase of Sex I along with Rings is much greater than Sex F, which means that it may easy to classify the Sex to different Age group by quantity measure like Height, Weight etc.
 
+### <div id="Conclusion1">[Conclusion](#Conclusion)
+#### From the analysis above, we can conclude that quantity measure Volume (body size) and Whole.weight (weight) can classify abalone to different age group, especially for Sex I. In practice, breeders do not need to adopt complicated method to detect the Rings of abalone, however, they can know abalone’s age only based on its body size and weight. This method is simple but highly accurate, which should be recommended. Nevertheless, if more detailed age information is desired, the method may fail; thus further research on the topic is required.
 
 
 
