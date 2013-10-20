@@ -10,6 +10,6 @@ For the detailed report, please refer to [Final Reprot](http://rpubs.com/zhangji
 
 Data (Should be downloaded):
  - Input data: [`abalone.csv`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/abalone.csv)
- - Scripts: [`HW6_part1.R`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/HW6_part1.R) and [`HW6_part2.R`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/HW6_part2.R) and [`style.R`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/style.R) and [`custom.css`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/custom.css)
- - Makefile-like script: [`Makefile.R`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/Makefile.R)
- - Markdown file: [`Final Report.Rmd`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/Final%20Report.Rmd)
+ - Scripts: [`HW6_part1.R`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/Input%20Data/HW6_part1.R) and [`HW6_part2.R`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/Input%20Data/HW6_part2.R) and [`style.R`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/Final%20Report/style.R) and [`custom.css`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/Final%20Report/custom.css)
+ - Makefile-like script: [`Makefile.R`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/Input%20Data/Makefile.R)
+ - Markdown file: [`Final Report.Rmd`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/Final%20Report/Final%20Report.Rmd)
