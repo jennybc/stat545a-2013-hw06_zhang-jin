@@ -6,7 +6,7 @@ stat545a-2013-hw06_zhang-jin
     * Date: 2013-10-19
 
 
-For the detailed report, please refer to [Final Reprot](http://rpubs.com/zhangjinyuan/stat545a-2013-hw06_zhang-jin).
+For the detailed report, please refer to [Final Report on RPubs](http://rpubs.com/zhangjinyuan/stat545a-2013-hw06_zhang-jin).
 
 Data (Should be downloaded):
  - Input data: [`abalone.csv`](https://github.com/0527zhangjinyuan/stat545a-2013-hw06_zhang-jin/blob/master/abalone.csv)
