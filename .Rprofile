@@ -1,6 +1,6 @@
 options(rstudio.markdownToHTML = 
           function(inputFile, outputFile) {      
             require(markdown)
-            markdownToHTML(inputFile, outputFile, stylesheet='custom.css')   
+            markdownToHTML(inputFile, outputFile, stylesheet='report/custom.css')   
           }
 )
