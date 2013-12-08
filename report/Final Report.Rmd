@@ -64,7 +64,7 @@ ggplot(gData, aes(x = Height, y = factor(Rings), colour= factor(Sex) ))+ geom_ji
 ```
 
 
-#### From the graph above we can see that there are some outlines in Female. I want to get rid of them.
+#### From the graph above we can see that there are some outliers in Female. I want to get rid of them.
 ```{r fig.width= 10}
 jData = subset(gData, Height <0.4)
 ggplot(jData, aes(x = Height, y = factor(Rings), colour= factor(Sex) ))+ geom_jitter(position = position_jitter(width = .1))  + geom_point() + ggtitle("Reduced Data: Height vs Rings") + scale_colour_brewer(type="seq",palette="Set1") 
@@ -88,7 +88,7 @@ Number of abalone of different Sex in different Age group.
 with(Data, table(Sex, Age))
 ```
 
-#### First of all, I want to test whether Observation data like Height, Whole.weight can be helpful to decide the abalone to different Age group. Logistic regression is applied to do this analysis.
+#### First of all, I want to test whether Observation data like Height, Whole.weight can be helpful to classify the abalone to different Age group. Logistic regression is applied to do this analysis.
 
 ```{r fig.width= 10}
 ggplot(Data, aes(x = Whole.weight, y=Height)) + geom_point(aes(colour = Rings)) +scale_colour_gradient(low = "purple") + stat_smooth(colour="red") + ggtitle("Whole.weight vs Height")
