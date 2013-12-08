@@ -46,7 +46,7 @@ ggsave(file.path("graphs", "Reduced Data: Height vs Rings.png"))
 # reorder data according to Sex and Rings
 Order_Data = arrange(jData, Sex, Rings, Length)
 write.table(Order_Data,
-            file.path("data", "abalone_clean.csv"), quote = FALSE,
+            file.path("data", "abalone_clean.csv"), 
             sep = ",", row.names = FALSE)
 
 
